@@ -1,0 +1,39 @@
+shared:
+  database:
+    type: postgresql
+    driver: org.postgresql.Driver
+    url: postgres://localhost:5432/xray?sslmode=disable
+    username: postgres
+    password: 751d7a.aesgcm256.yldLBB0owESeObRYaiPeTRWEacZLr8LcIR3p4Z0rjdr8pf2B
+  rabbitMq:
+    node:
+      rabbitmqConf:
+      - name: ssl_options.cacertfile
+        value: /opt/xray/var/data/rabbitmq/certs/ca-cert.pem
+      - name: ssl_options.certfile
+        value: /opt/xray/var/data/rabbitmq/certs/server-cert.pem
+      - name: ssl_options.keyfile
+        value: /opt/xray/var/data/rabbitmq/certs/server-key.pem
+      - name: ssl_options.verify
+        value: verify_peer
+      - name: ssl_options.fail_if_no_peer_cert
+        value: false
+      - name: management.listener.ssl
+        value: true
+      - name: listeners.ssl.default
+        value: 5671
+    autoStop: true
+    url: amqps://guest:password@rabbitmq:5671
+    password: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    env:
+      GODEBUG: "x509ignoreCN=0"
+      XRAY_CERT_FILE_PATH: "/opt/xray/var/data/server/certs/client-cert.pem"
+      XRAY_CERT_KEY_FILE_PATH: "/opt/xray/var/data/server/certs/client-key.pem"
+      XRAY_CA_CERT_FILE_PATH: "/opt/xray/var/data/server/certs/ca-cert.pem"
+  jfrogUrl: http://test.devopspilot.com:8082
+  security:
+      joinKey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  node:
+      ip: 10.1.0.6
+  user: root
+  group: root
